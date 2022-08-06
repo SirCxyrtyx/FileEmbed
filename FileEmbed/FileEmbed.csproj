@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	  <LangVersion>latest</LangVersion>
+	  <WarningLevel>9999</WarningLevel>
+	  <Nullable>enable</Nullable>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <IncludeBuildOutput>false</IncludeBuildOutput>
+	  <IsRoslynComponent>true</IsRoslynComponent>
+	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	  <PackageId>NFH.$(AssemblyName)</PackageId>
+	  <Authors>NatalieFHowes</Authors>
+	  <AssemblyVersion>0.1</AssemblyVersion>
+	  <PackageTags>Embed</PackageTags>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <PackageProjectUrl>https://github.com/SirCxyrtyx/FileEmbed</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/SirCxyrtyx/FileEmbed</RepositoryUrl>
+	  <Description>A source generator for embedding resource files directly into your assembly. Access them as a `ReadOnlySpan&lt;byte&gt;`, with no allocations or reflection needed.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	  <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.2.0" />
+  </ItemGroup>
+
+    <ItemGroup>
+        <!-- Package the generator in the analyzer directory of the nuget package -->
+        <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+        <None Include="..\README.md">
+          <Pack>True</Pack>
+          <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+</Project>
