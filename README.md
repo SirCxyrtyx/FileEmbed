@@ -4,13 +4,13 @@ A source generator for embedding resource files directly into your assembly. Acc
 
 Add the package to your application using
 
-```bash
+```
 dotnet add package NFH.FileEmbed
 ```
 
-You will probably wish to add `PrivateAssets="all"` to the PackageReference for this package in your csproj, to prevent this becoming a dependency (as it's only needed at compile time).
+You will probably wish to add `PrivateAssets="all"` to the `PackageReference` for this package in your csproj, to prevent this becoming a dependency (as it's only needed at compile time).
 
-##Example Usage
+## Example Usage
 ```csharp
 //attribute is in this namespace
 using FileEmbed;
@@ -63,8 +63,8 @@ namespace EmbedExample
 }
 ```
 
-##Limitations
-This doesn't work so well for input files > 1MB unfortunately. The source generator itself can handle large files just fine, but in my experience, Visual Studio chokes on the generated output, using huge amounts of memory after the files are generated. I have not yet investigated why. To protect users of this source generator from accidently locking up VS, it imposes a 1MB limit on input files. This can be overriden if you wish to try using this with larger files. To do so, put this in your csproj file:
+## Limitations
+This doesn't work so well for input files larger than 1MB unfortunately. The source generator itself can handle large files just fine, but, in my experience, Visual Studio chokes on the generated output, using huge amounts of memory after the files are generated. I have not yet investigated why. To protect users of this source generator from accidently locking up VS, it imposes a 1MB limit on input files. This can be overriden if you wish to try using this with larger files. To do so, put this in your csproj file:
 ```xml
 <!-- To set FileEmbed_MaxEmbedSize, you must first make it visible to the compiler -->
 <ItemGroup>
@@ -72,6 +72,5 @@ This doesn't work so well for input files > 1MB unfortunately. The source genera
 </ItemGroup>
 <PropertyGroup>
 	<FileEmbed_MaxEmbedSize>SIZE_IN_BYTES_GOES_HERE</FileEmbed_MaxEmbedSize>
-	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 </PropertyGroup>
 ```
